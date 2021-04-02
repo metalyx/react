@@ -16,18 +16,15 @@ class Dishdetail extends Component {
     // renderDish method - render card of exact dish
     renderDish(dish) {
         
-        if (this.props.selected != null) {
-            // for (var a in this.props.selected.selectedDish) {
-            //     console.log(this.props.selected.selectedDish.id)
-            // }
+        if (this.props.dish != null) {
             return(
                 
-                <div key={this.props.selected.selectedDish.id} className="col-12 col-md-5 m-1">
+                <div key={this.props.dish.id} className="col-12 col-md-5 m-1">
                     <Card>
-                        <CardImg width="100%" src={this.props.selected.selectedDish.image} alt={this.props.selected.selectedDish.name} />
+                        <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
                         <CardBody>
-                            <CardTitle>{this.props.selected.selectedDish.name}</CardTitle>
-                            <CardText>{this.props.selected.selectedDish.description}</CardText>
+                            <CardTitle>{this.props.dish.name}</CardTitle>
+                            <CardText>{this.props.dish.description}</CardText>
                         </CardBody>
                     </Card>
                 </div>
@@ -35,7 +32,6 @@ class Dishdetail extends Component {
             );
         }
         else {
-            console.log("props == null")
             return(
                 <div></div>
             );
@@ -43,8 +39,8 @@ class Dishdetail extends Component {
     }
 
     renderComments (comments) {
-        if (this.props.selected != null) {
-            const allcomments = this.props.selected.selectedDish.comments.map((com) => {
+        if (this.props.dish != null) {
+            const allcomments = this.props.dish.comments.map((com) => {
                 return (
                     <ul key={com.id} className="list-unstyled">
                         <li>{com.comment}</li>
@@ -62,7 +58,7 @@ class Dishdetail extends Component {
             );
         }
         else {
-            console.log("props == null")
+            
             return (
                 <div />
             );
@@ -72,7 +68,10 @@ class Dishdetail extends Component {
 
     render () {
        return (
-                [this.renderDish(this.props), this.renderComments(this.props)]
+           <div className="row">
+                {[this.renderDish(this.props), this.renderComments(this.props)]}
+           </div>
+               
            );
     }
         
