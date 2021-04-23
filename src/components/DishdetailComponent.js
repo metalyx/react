@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentFormComponent';
 
     function RenderDish({dish}) {
         
@@ -49,6 +50,7 @@ import { Link } from 'react-router-dom';
                 <div className="col-12 col-md-5 m-1">
                     <h2>Comments</h2>
                     {allcoments}
+                    <CommentForm/>
                 </div>
                 
             );
@@ -82,6 +84,7 @@ import { Link } from 'react-router-dom';
                      <RenderDish dish={props.dish}/>
                      
                      <RenderComments comments={props.comments}/>
+                     
                 </div>
                 </div>
                
