@@ -4,7 +4,7 @@ import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
 import { Button, Col, Modal, ModalBody, ModalHeader, Row, Label } from 'reactstrap';
 import { LocalForm, Errors, Control } from 'react-redux-form';
-
+import { Loading } from '../components/LoadingComponent';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -44,16 +44,31 @@ class Dishdetail extends React.Component {
     }
 
     RenderDish(dish) {
-        
-        if (dish != null) {
+        if (this.props.isLoading) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <Loading />
+                    </div>
+                </div>
+            )
+        }
+        else if (this.props.errMess) {
+            <div className="container">
+                <div className="row">
+                    <h4>{this.props.errMess}</h4>
+                </div>
+            </div>
+        }
+        if (this.props.dish != null) {
             return(
                 
-                <div key={dish.id} className="col-12 col-md-5 m-1">
+                <div key={this.props.dish.id} className="col-12 col-md-5 m-1">
                     <Card>
-                        <CardImg width="100%" src={dish.image} alt={dish.name} />
+                        <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
                         <CardBody>
-                            <CardTitle>{dish.name}</CardTitle>
-                            <CardText>{dish.description}</CardText>
+                            <CardTitle>{this.props.dish.name}</CardTitle>
+                            <CardText>{this.props.dish.description}</CardText>
                         </CardBody>
                     </Card>
                 </div>
@@ -176,8 +191,11 @@ class Dishdetail extends React.Component {
 
 
      dd () {
+        if (this.props.dish === undefined) {
+            return <Loading />
+        }
         if (this.props != null) {
-            
+           
             return (
                 <div className="container">
                     <div className="row">
