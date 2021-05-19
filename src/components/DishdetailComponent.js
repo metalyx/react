@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { Button, Col, Modal, ModalBody, ModalHeader, Row, Label } from 'reactstrap';
 import { LocalForm, Errors, Control } from 'react-redux-form';
 import { Loading } from '../components/LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -62,10 +64,10 @@ class Dishdetail extends React.Component {
         }
         if (this.props.dish != null) {
             return(
-                
+            
                 <div key={this.props.dish.id} className="col-12 col-md-5 m-1">
                     <Card>
-                        <CardImg width="100%" src={this.props.dish.image} alt={this.props.dish.name} />
+                        <CardImg width="100%" src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
                         <CardBody>
                             <CardTitle>{this.props.dish.name}</CardTitle>
                             <CardText>{this.props.dish.description}</CardText>
