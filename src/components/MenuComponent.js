@@ -35,14 +35,16 @@ import { baseUrl } from '../shared/baseUrl';
                         <Loading />
                     </div>
                 </div>
-            )
+            );
         }
         else if (props.dishes.errMess) {
+            return (
             <div className="container">
                 <div className="row">
-                    <h4>{this.props.dishes.errMess}</h4>
+                    <h4>{props.dishes.errMess}</h4>
                 </div>
             </div>
+            );
         }
         else {
             return ( 
