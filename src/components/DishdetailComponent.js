@@ -6,7 +6,7 @@ import { Button, Col, Modal, ModalBody, ModalHeader, Row, Label } from 'reactstr
 import { LocalForm, Errors, Control } from 'react-redux-form';
 import { Loading } from '../components/LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
-
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -63,13 +63,18 @@ class Dishdetail extends React.Component {
             return(
             
                 <div key={this.props.dish.id} className="col-12 col-md-5 m-1">
-                    <Card>
-                        <CardImg width="100%" src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
-                        <CardBody>
-                            <CardTitle>{this.props.dish.name}</CardTitle>
-                            <CardText>{this.props.dish.description}</CardText>
-                        </CardBody>
-                    </Card>
+                    <FadeTransform in 
+                        tranformProps={{
+                            exitTransform: 'scale(0.5) translateY(-50%)'
+                        }}>
+                            <Card>
+                                <CardImg width="100%" src={baseUrl + this.props.dish.image} alt={this.props.dish.name} />
+                                <CardBody>
+                                    <CardTitle>{this.props.dish.name}</CardTitle>
+                                    <CardText>{this.props.dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                    </FadeTransform>
                 </div>
                 
             );
@@ -88,10 +93,16 @@ class Dishdetail extends React.Component {
             var allcoments = comments.map((a) => {
                
                     return (
+                        <Fade in>
                         <ul key={a.id} className="list-unstyled">
-                            <li>{a.comment}</li>
-                            <li>-- {a.author}, {dateFormat(a.date, "mmmm dS, yyyy")}</li>
+                            
+                                
+                                    <li>{a.comment}</li>
+                                    <li>-- {a.author}, {dateFormat(a.date, "mmmm dS, yyyy")}</li>
+                                
+                            
                         </ul>
+                        </Fade>
                     );
                 
                 
@@ -101,7 +112,9 @@ class Dishdetail extends React.Component {
             return (
                 <div className="col-12 col-md-5 m-1">
                     <h2>Comments</h2>
-                    {allcoments}
+                    <Stagger in>
+                        {allcoments}
+                    </Stagger>
                     <div className="row">
                         <div className="col-12">
                             <Button  onClick={this.toggleModal} className="btn btn-secondary">
