@@ -19,11 +19,7 @@ class Dishdetail extends React.Component {
         
         this.state = {
             isModalOpen: false,
-            // dish: props.dish,
-            // comments: props.comments,
-            // props: props,
-            // addComment: props.addComment,
-            // dishId: props.dishId
+            
         }
         this.toggleModal = this.toggleModal.bind(this);
         this.handleComments = this.handleComments.bind(this);
@@ -39,7 +35,7 @@ class Dishdetail extends React.Component {
         
         this.toggleModal();
         
-        this.props.addComment(this.props.dish.id, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.dish.id, values.rating, values.author, values.comment);
       
         
         
@@ -60,6 +56,7 @@ class Dishdetail extends React.Component {
                 <div className="row">
                     <h4>{this.props.errMess}</h4>
                 </div>
+                
             </div>
         }
         if (this.props.dish != null) {
@@ -86,7 +83,7 @@ class Dishdetail extends React.Component {
 
    
 
-    RenderComments (comments, addComment, dishId) {
+    RenderComments (comments) {
         if (comments != null) {
             var allcoments = comments.map((a) => {
                
@@ -177,7 +174,6 @@ class Dishdetail extends React.Component {
                             </ModalBody>
                         </Modal>
                     </div>
-          
                 </div>
                 
             );
@@ -213,7 +209,7 @@ class Dishdetail extends React.Component {
                     <div className="row">
                      
                      {this.RenderDish(this.props.dish)}
-                     {this.RenderComments(this.props.comments, this.props.addComment, this.props.dishId )}
+                     {this.RenderComments(this.props.comments, this.props.postComment, this.props.dishId )}
                      {/* <RenderComments comments={props.comments}/> */}
                      
                 </div>
